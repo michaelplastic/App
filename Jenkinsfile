@@ -21,8 +21,12 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
+                    // Stop and remove existing container
+                    sh 'docker stop color-web-app || true'
+                    sh 'docker rm color-web-app || true'
+
                     // Run Docker container
-                    docker.image('color-web-app').run('-p 8081:8000')
+                    docker.image('color-web-app').run('-p 8080:8000', '--name color-web-app')
                 }
             }
         }

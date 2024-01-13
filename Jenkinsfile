@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container
-                    docker.image('color-web-app').run('-p 8080:8000')
+                    docker.image('color-web-app').run('-p 8081:8000')
                 }
             }
         }

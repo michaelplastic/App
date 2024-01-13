@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Check out your source code
                 git 'https://github.com/michaelvaknin/App.git'
             }
         }
@@ -12,8 +11,16 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build Docker image
                     docker.build('color-web-app')
+                }
+            }
+        }
+
+        stage('Stop and Remove Existing Container') {
+            steps {
+                script {
+                    sh 'docker stop color-web-app || true'
+                    sh 'docker rm color-web-app || true'
                 }
             }
         }
@@ -21,12 +28,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Stop and remove existing container
-                    sh 'docker stop color-web-app || true'
-                    sh 'docker rm color-web-app || true'
-
-                    // Run Docker container
-                    docker.image('color-web-app').run('-p 8081:8000', '--name color-web-app')
+                    docker.image('color-web-app').run('-p 8081:8000', '--name=color-web-app')
                 }
             }
         }

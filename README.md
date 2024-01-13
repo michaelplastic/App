@@ -54,7 +54,40 @@ This is a simple Flask web app that changes its color on each reload. The app is
 
    Now, your local Flask app will be accessible from the ngrok public URL, and GitHub will trigger webhooks on each push to the repository.
 
-## Contributing
+## Continuous Integration/Continuous Deployment (CI/CD) with Jenkins
 
-Feel free to contribute by opening issues or pull requests.
+This project includes a Jenkinsfile, which defines the CI/CD pipeline for automating the build and deployment process:
+
+1. **Install Jenkins:**
+
+   Ensure that Jenkins is installed and running on your machine.
+
+2. **Configure Jenkins Webhook:**
+
+   - Open your GitHub repository (https://github.com/michaelvaknin/App).
+   - Go to "Settings" > "Webhooks" > "Add webhook."
+   - Set the Payload URL to your Jenkins server (e.g., `http://localhost:8080/github-webhook/`).
+   - Content type should be `application/json`.
+   - Optionally, set a secret if needed.
+   - Choose individual events, or just use "Send me everything."
+
+3. **Create a Jenkins Pipeline:**
+
+   - Open Jenkins in your web browser (http://localhost:8080/).
+   - Create a new pipeline job.
+   - In the pipeline configuration, under "Pipeline," select "Pipeline script from SCM."
+   - Choose Git as the SCM.
+   - Set the Repository URL to `https://github.com/michaelvaknin/App.git`.
+   - Save the configuration.
+
+4. **Create a Jenkinsfile:**
+
+   - In your GitHub repository, create a file named `Jenkinsfile` with the pipeline script.
+
+5. **Run the Jenkins Job:**
+
+   - Save the Jenkinsfile.
+   - Trigger the pipeline manually or wait for the webhook to trigger it automatically when changes are pushed to the GitHub repository.
+
+Feel free to adjust the instructions based on your Jenkins setup and any additional details specific to your project.
 

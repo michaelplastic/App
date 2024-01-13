@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE_NAME = 'color-web-app'
-        HOST_PORT = '8081'  // Change this to a port that is not in use
+        HOST_PORT = '8081'  // Change this to the desired port
     }
 
     stages {
@@ -23,15 +23,13 @@ pipeline {
             }
         }
 
-        stage('Remove Previous Container') {
+        stage('Remove Previous Containers') {
             steps {
                 script {
-                    try {
-                        // Try to stop and remove the existing container
-                        docker.image(DOCKER_IMAGE_NAME).stop()
-                        docker.image(DOCKER_IMAGE_NAME).remove(force: true)
-                    } catch (Exception e) {
-                        echo "No previous container found. Continuing..."
+                    // Stop and remove all existing containers on the specified port
+                    docker.ps("-q --filter publish=${HOST_PORT}").each { containerId ->
+                        docker.stop(containerId)
+                        docker.remove(containerId)
                     }
                 }
             }
@@ -40,8 +38,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Run Docker container with a different host port
-                    docker.image(DOCKER_IMAGE_NAME).run("-p ${HOST_PORT}:8000")
+                    // Run Docker container on the specified port
+                    docker.image(DOCKER_IMAGE_NAME).run("-p ${HOST_PORT}:8000 -d")
                 }
             }
         }

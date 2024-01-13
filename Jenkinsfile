@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE_NAME = 'color-web-app'
+        HOST_PORT = '8081'  // Change this to a port that is not in use
     }
 
     stages {
@@ -39,8 +40,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Run Docker container
-                    docker.image(DOCKER_IMAGE_NAME).run('-p 8080:8000')
+                    // Run Docker container with a different host port
+                    docker.image(DOCKER_IMAGE_NAME).run("-p ${HOST_PORT}:8000")
                 }
             }
         }

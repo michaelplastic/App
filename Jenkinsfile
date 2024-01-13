@@ -26,11 +26,9 @@ pipeline {
         stage('Remove Previous Containers') {
             steps {
                 script {
-                    // Stop and remove all existing containers on the specified port
-                    docker.ps("-q --filter publish=${HOST_PORT}").each { containerId ->
-                        docker.stop(containerId)
-                        docker.remove(containerId)
-                    }
+                    // Remove all existing containers on the specified port
+                    sh "docker ps -q --filter publish=${HOST_PORT} | xargs docker stop"
+                    sh "docker ps -q --filter publish=${HOST_PORT} | xargs docker rm"
                 }
             }
         }

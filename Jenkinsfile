@@ -26,7 +26,7 @@ pipeline {
                     sh 'docker rm color-web-app || true'
 
                     // Run Docker container
-                    docker.image('color-web-app').run('-p 8080:8000', '--name color-web-app')
+                    docker.image('color-web-app').run('-p 8081:8000', '--name color-web-app')
                 }
             }
         }

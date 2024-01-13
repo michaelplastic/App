@@ -28,7 +28,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image('color-web-app').run('-p 8081:8000 -d')
+                    docker.image('color-web-app').run('-p 8081:8000 -d', 'color-web-app')
                 }
             }
         }

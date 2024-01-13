@@ -26,9 +26,15 @@ pipeline {
         stage('Remove Previous Containers') {
             steps {
                 script {
-                    // Remove all existing containers on the specified port
-                    sh "docker ps -q --filter publish=${HOST_PORT} | xargs docker stop"
-                    sh "docker ps -q --filter publish=${HOST_PORT} | xargs docker rm"
+                    // Stop and remove all existing containers on the specified port
+                    def existingContainers = sh(script: "docker ps -q --filter publish=${HOST_PORT}", returnStdout: true).trim()
+
+                    if (existingContainers) {
+                        sh(script: "docker stop ${existingContainers}")
+                        sh(script: "docker rm ${existingContainers}")
+                    } else {
+                        echo "No previous containers found on port ${HOST_PORT}."
+                    }
                 }
             }
         }

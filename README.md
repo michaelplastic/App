@@ -37,13 +37,13 @@ This is a simple Flask web app that changes its color on each reload. The app is
 
    [Download ngrok](https://ngrok.com/download) and follow the instructions for your operating system.
 
-2. **Run ngrok to expose your local server:**
+2. **Run ngrok to expose your local server for testing:**
 
     ```bash
-    ngrok http 8080
+    ngrok start --all --config ./ngrok.yml
     ```
 
-    Note the public URL provided by ngrok (e.g., `https://abcd1234.ngrok.io`).
+    Note the public URL provided by ngrok (e.g., `https://abcd1234.ngrok.io`). Please use ngrok for testing purposes only.
 
 3. **Update the GitHub webhook:**
 

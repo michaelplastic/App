@@ -1,0 +1,3 @@
+# Ignore vars.yaml as it contains sensitive information
+vars.yaml
+

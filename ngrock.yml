@@ -1,0 +1,10 @@
+file version: "2"
+authtoken: $AUTHTOKEN_VAR
+tunnels:
+  jenkins:
+    addr: 8080
+    proto: http
+  flask:
+    addr: 8081
+    proto: http
+

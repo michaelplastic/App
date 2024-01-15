@@ -4,40 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Web App</title>
-    <!-- Add a link to a frontend framework (e.g., Bootstrap) here -->
-    <!-- Add a link to an icon library (e.g., Font Awesome) here -->
-    <style>
-        body {
-            background-color: {{ color }};
-            text-align: center;
-            padding: 100px;
-            transition: background-color 0.5s ease; /* Smooth color transition */
-        }
-        h1 {
-            color: white;
-            font-size: 2em;
-        }
-        button {
-            /* Add styles for the button */
-        }
-    </style>
+    <title>Color Web App Menu</title>
 </head>
 <body>
-    <h1>Color Web App!</h1>
-    <p>Click the button to change the site color!</p>
-    <button id="changeColorBtn">Change Color</button>
-
-    <script>
-        document.getElementById('changeColorBtn').addEventListener('click', function() {
-            // Use AJAX to fetch a new color from the server
-            fetch('/').then(response => response.text()).then(html => {
-                const newColor = new DOMParser().parseFromString(html, 'text/html')
-                                 .querySelector('body').style.backgroundColor;
-                document.body.style.backgroundColor = newColor;
-            });
-        });
-    </script>
+    <h1>Welcome to the Color Web App Menu!</h1>
+    <p>Click the button below to access the Color Web App.</p>
+    <a href="/color-web-app" target="_blank">
+        <button>Open Color Web App</button>
+    </a>
 </body>
 </html>
 

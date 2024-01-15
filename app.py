@@ -7,6 +7,10 @@ app = Flask(__name__)
 cute_colors = ['#FFB6C1', '#FF69B4', '#FF1493', '#FFC0CB', '#FFD700', '#FF4500']
 
 @app.route('/')
+def menu():
+    return render_template('main.html')
+
+@app.route('/color-web-app')
 def index():
     # Choose a random cute color
     chosen_color = random.choice(cute_colors)

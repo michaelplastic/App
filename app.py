@@ -3,8 +3,8 @@ import random
 
 app = Flask(__name__)
 
-# List of cute colors
-cute_colors = ['#FFB6C1', '#FF69B4', '#FF1493', '#FFC0CB', '#FFD700', '#FF4500']
+# List of colors
+colors = ['#FFB6C1', '#FF69B4', '#FF1493', '#FFC0CB', '#FFD700', '#FF4500']
 
 @app.route('/')
 def menu():
@@ -12,8 +12,8 @@ def menu():
 
 @app.route('/color-web-app')
 def index():
-    # Choose a random cute color
-    chosen_color = random.choice(cute_colors)
+    # Choose a random color
+    chosen_color = random.choice(colors)
     return render_template('index.html', color=chosen_color)
 
 if __name__ == '__main__':

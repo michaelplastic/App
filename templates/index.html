@@ -4,14 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Web App Menu</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* 100% of the viewport height */
+            margin: 0;
+        }
+        form {
+            margin-top: 20px;
+        }
+    </style>
+    <title>Color Changing Web App</title>
 </head>
-<body>
-    <h1>Welcome to the Color Web App Menu!</h1>
-    <p>Click the button below to access the Color Web App.</p>
-    <a href="/color-web-app" target="_blank">
-        <button>Open Color Web App</button>
-    </a>
+<body style="background-color: {{ background_color }};">
+    <h1>Welcome to the Color Changing Web App!</h1>
+    <p>Click the buttons below to interact with the web app.</p>
+    <form action="/" method="post">
+        <input type="hidden" name="_method" value="post">
+        <button type="submit">Change Color</button>
+    </form>
+    <form action="/bat-attack" method="get">
+        <button type="submit">Bat Attack</button>
+    </form>
 </body>
 </html>
 

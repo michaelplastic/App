@@ -1,21 +1,27 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import random
 
 app = Flask(__name__)
 
-# List of colors
-colors = ['#FFB6C1', '#FF69B4', '#FF1493', '#FFC0CB', '#FFD700', '#FF4500']
+# Function to generate a random color
+def generate_random_color():
+    return "#{:06x}".format(random.randint(0, 0xFFFFFF))
 
-@app.route('/')
-def menu():
-    return render_template('main.html')
-
-@app.route('/color-web-app')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    # Choose a random color
-    chosen_color = random.choice(colors)
-    return render_template('index.html', color=chosen_color)
+    if request.method == 'POST':
+        # Generate a new random color when the form is submitted
+        background_color = generate_random_color()
+    else:
+        # Generate a random color for the initial page load
+        background_color = generate_random_color()
+    return render_template('index.html', background_color=background_color)
+
+@app.route('/bat-attack')
+def bat_attack():
+    return render_template('bat_attack.html')
 
 if __name__ == '__main__':
+    # Use 0.0.0.0 to make the app accessible from outside the container
     app.run(host='0.0.0.0', port=8000, debug=True)
 

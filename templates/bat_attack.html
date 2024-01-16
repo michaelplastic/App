@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .bats-container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .bat {
+            font-size: 0.8em;
+            position: absolute;
+            animation: flyBat linear infinite;
+        }
+
+        /* Animation for individual bat movement */
+        @keyframes flyBat {
+            0%, 100% { transform: translate(0, 0); }
+            25%, 75% { transform: translate(20px, 20px); }
+            50% { transform: translate(40px, 40px); }
+        }
+    </style>
+    <title>Bat Attack Page</title>
+</head>
+<body>
+    <!-- Bats Container -->
+    <div class="bats-container" id="bats-container"></div>
+
+    <script>
+        // Dynamically create and position a large number of bats with random movements
+        const batsContainer = document.getElementById('bats-container');
+        const numBats = 5000;
+
+        for (let i = 0; i < numBats; i++) {
+            const bat = document.createElement('div');
+            bat.innerHTML = '🦇';
+            bat.className = 'bat';
+            batsContainer.appendChild(bat);
+
+            // Set initial position
+            setPosition(bat);
+
+            // Set random movement
+            setRandomMovement(bat);
+        }
+
+        function setPosition(bat) {
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+            bat.style.left = `${randomX}px`;
+            bat.style.top = `${randomY}px`;
+        }
+
+        function setRandomMovement(bat) {
+            const duration = 2 + Math.random() * 3; // Random duration between 2 and 5 seconds
+            const delay = Math.random() * duration; // Random delay within the duration
+
+            bat.style.animation = `flyBat ${duration}s linear ${delay}s infinite`;
+
+            // After each movement cycle, reset the bat's position to the top-left corner
+            bat.addEventListener('animationiteration', () => {
+                setPosition(bat);
+            });
+        }
+    </script>
+</body>
+</html>
+
